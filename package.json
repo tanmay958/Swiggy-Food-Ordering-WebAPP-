@@ -2,10 +2,11 @@
   "name": "namaste-react",
   "version": "1.0.0",
   "description": "",
+  "source": "src/index.thml",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel src/index.html",
-    "build": "parcel src/index.html"
+    "build": "parcel build"
   },
   "author": "",
   "license": "ISC",
