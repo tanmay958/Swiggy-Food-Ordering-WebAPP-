@@ -11,7 +11,7 @@ export const Header = () => {
           <Link className="link " to="/">
             <img
               className="text-orange-500 h-20 w-20 "
-              src="https://cdn.worldvectorlogo.com/logos/zomato-1.svg"
+              src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_96,h_96/portal/c/logo_2022.png"
               alt="Description of the image"
             />
           </Link>
@@ -24,22 +24,24 @@ export const Header = () => {
               Account
             </Link>
           </h3>
-          <h3>
+          {/* <h3>
             <Link className="text-gray-500 h-6 w-6" to="/orders">
               Orders
             </Link>
-          </h3>
-          {/* need to subscribe to the store */}
+          </h3> */}
           <h3>
             <Link className="text-gray-500 h-6 w-6" to="/cart">
-              Cart <span>{cartItems.length}</span>
+              Cart{" "}
+              <span className="text-gray-800 bg-gray-50 px-2 py-1 rounded-full">
+                {cartItems.length}
+              </span>
             </Link>
           </h3>
-          <h3>
+          {/* <h3>
             <Link className="text-gray-500 h-6 w-6" to="/instamart">
               Instamart
             </Link>
-          </h3>
+          </h3> */}
         </div>
       </div>
     </div>

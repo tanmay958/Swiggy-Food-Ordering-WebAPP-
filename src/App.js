@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import { lazy, Suspense } from "react";
+
 import ReactDOM from "react-dom/client";
 import { Header } from "./components/Header";
 import Body from "./components/Body";
@@ -14,7 +14,7 @@ import Profile from "./components/Profile";
 import Shimmer from "./components/Shimmer";
 import { Provider } from "react-redux";
 import store from "./utils/store";
-import PaymentDone from "./components/PaymentDone";
+import PaymentDone from "./components/PaymentSucess";
 const Instamart = lazy(() => import("./components/Instamart"));
 
 const Layout = () => {
@@ -23,7 +23,7 @@ const Layout = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <Header />
         <Outlet />
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Provider>
   );
@@ -32,7 +32,7 @@ const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    errorElement: <Error />,
+    // errorElement: <Error />,
     children: [
       {
         path: "/",
@@ -52,6 +52,7 @@ const appRouter = createBrowserRouter([
         path: "/cart",
         element: <Cart />,
       },
+
       {
         path: "/orders",
         element: <Order />,
@@ -67,10 +68,6 @@ const appRouter = createBrowserRouter([
             <Instamart />
           </Suspense>
         ),
-      },
-      {
-        path: "paymentSucess",
-        element: <PaymentDone />,
       },
     ],
   },

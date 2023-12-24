@@ -3,14 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 const restaurantSlice = createSlice({
   name: "restaurant",
   initialState: {
-    restaurant: "",
+    restaurant: { details: { name: "No Item" } },
   },
   reducers: {
     addRestaurant: (state, action) => {
-      state.restaurant = action.payload;
+      state.restaurant.details = action.payload;
     },
     clearRestaurant: (state, action) => {
-      state.restaurant = "";
+      state.restaurant.details = { details: { name: "No Items" } };
     },
   },
 });

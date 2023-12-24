@@ -5,7 +5,7 @@ import ShimmerMenu from "./ShimmerMenu";
 import MenuItem from "./MenuItem";
 import RestaurantDetails from "./RestaurantDetails";
 
-function displayCardType(props) {
+function displayCardType(props, resDetails) {
   return (
     <>
       <h2 className="text-2xl bg-slate-50 font-semibold my-6">
@@ -13,20 +13,26 @@ function displayCardType(props) {
       </h2>
       <div className="space-y-4 ">
         {props.itemCards.map((ele) => {
-          return <MenuItem details={ele.card.info} key={ele.card.id} />;
+          return (
+            <MenuItem
+              details={ele.card.info}
+              key={ele.card.id}
+              restaurantData={resDetails}
+            />
+          );
         })}
       </div>
     </>
   );
 }
-function displaySection(props) {
+function displaySection(props, resDetails) {
   let filledJSX = [];
   for (let i = 0; i < props.length; i++) {
     filledJSX.push(
       props[i]?.card?.card?.itemCards === undefined ? (
         <></>
       ) : (
-        displayCardType(props[i].card.card)
+        displayCardType(props[i].card.card, resDetails)
       )
     );
   }
@@ -68,7 +74,8 @@ const RestaurantMenu = () => {
       </div>
       <div className="max-w-screen-lg mx-auto p-6">
         {displaySection(
-          details.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards
+          details.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards,
+          details.data.cards[0].card.card.info
         ).map((ele) => {
           return ele;
         })}

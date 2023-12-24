@@ -5,11 +5,17 @@ const cartSlice = createSlice({
   initialState: {
     items: [],
     cost: 0,
+    restaurantDetails: { details: "none", hasCart: false },
   },
   reducers: {
     addItem: (state, action) => {
       state.items.push(action.payload);
-      state.cost = state.cost + action.payload.price / 100;
+      state.cost =
+        state.cost +
+        (action.payload.price === undefined
+          ? action.payload.defaultPrice
+          : action.payload.price) /
+          100;
     },
     clearCart: (state, action) => {
       state.items = [];
@@ -26,7 +32,12 @@ const cartSlice = createSlice({
         newState.push(prevState[i]);
       }
       state.items = newState;
-      state.cost = state.cost - toBeDeleted.price / 100;
+      state.cost =
+        state.cost -
+        (toBeDeleted.price === undefined
+          ? toBeDeleted.defaultPrice
+          : toBeDeleted.price) /
+          100;
 
       // Use filter to create a new array without the item to be removed
       // state.items = state.items.filter((item) => item !== itemToRemove);

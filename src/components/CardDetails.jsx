@@ -1,5 +1,4 @@
 import React from "react";
-// import { url, cdn } from "../config";
 import { cdn } from "../utils/config";
 
 function CardDetails({ rData }) {
@@ -34,7 +33,13 @@ function CardDetails({ rData }) {
             <div className="bg-[#FF6B6B] text-white text-sm font-bold py-1 px-3 w-max rounded-full mb-2">
               {aggregatedDiscountInfoV3.header +
                 " " +
-                aggregatedDiscountInfoV3.footer}
+                (aggregatedDiscountInfoV3.subHeader === undefined
+                  ? ""
+                  : aggregatedDiscountInfoV3.subHeader) +
+                " " +
+                (aggregatedDiscountInfoV3.footer === undefined
+                  ? ""
+                  : aggregatedDiscountInfoV3.footer)}
             </div>
           )}
           <div className="font-semibold">{name}</div>

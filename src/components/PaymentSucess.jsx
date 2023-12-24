@@ -1,4 +1,4 @@
-export default function Component() {
+const PaymentSucess = () => {
   return (
     <div className="max-w-lg mx-auto mt-10 bg-gradient-to-r from-gray-200 via-white to-gray-200 animate-gradient-x shadow-lg rounded-lg">
       <header className="p-6">
@@ -20,7 +20,7 @@ export default function Component() {
       </footer>
     </div>
   );
-}
+};
 
 function CheckCircleIcon(props) {
   return (
@@ -41,3 +41,4 @@ function CheckCircleIcon(props) {
     </svg>
   );
 }
+export default PaymentSucess;

@@ -51,7 +51,12 @@ export default function CartItems({ info, array }) {
           </button>
 
           <p className="ml-4 font-semibold">
-            ₹{countOfItem * (details.price / 100)}
+            ₹
+            {countOfItem *
+              ((details.price === undefined
+                ? details.defaultPrice
+                : details.price) /
+                100)}
           </p>
         </div>
       </div>

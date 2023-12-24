@@ -1,73 +1,89 @@
 import { useSelector } from "react-redux";
 import CartItems from "./CartItems";
 import { useState } from "react";
+import "reactjs-popup/dist/index.css";
+import { Link, Outlet } from "react-router-dom";
+import PaymentSucess from "./PaymentSucess";
 
 export default function Component() {
   const cartItems = useSelector((store) => store.cart.items);
   const price = useSelector((store) => store.cart.cost);
+  const [paymentDone, SetPaymentDone] = useState(false);
   const [itemArray, SetItemArray] = useState(cartItems);
   const obj = {};
   function arrayToObject() {
     for (let i = 0; i < itemArray.length; i++) {
-      // Initialize count as 0 for each item
       obj[itemArray[i].id] = { count: 0, details: itemArray[i] };
     }
 
     for (let i = 0; i < itemArray.length; i++) {
-      // Increment count for each item
       obj[itemArray[i].id].count = obj[itemArray[i].id].count + 1;
     }
   }
+  const restaurantDetails = useSelector((store) => store.restaurant.restaurant);
   arrayToObject();
   const [ItemObject, setItemObject] = useState(obj);
-  console.log("this is also getting called");
-  return (
+
+  return paymentDone ? (
+    <PaymentSucess />
+  ) : (
     <div className="flex h-screen bg-gray-100">
-      {console.log(ItemObject)}
       <div className="flex flex-col w-1/2 p-8 bg-white">
         <div className="flex items-center mb-6">
           <CloudLightningIcon className="text-orange-500 w-6 h-6" />
-          <h1 className="ml-2 text-lg font-semibold">SECURE CHECKOUT</h1>
+          <h1 className="ml-2 text-lg font-semibold">
+            {!paymentDone ? "SECURE CHECKOUT" : "ORDER RECEIVED"}
+          </h1>
         </div>
         <div className="flex items-start mb-4">
           <MapPinIcon className="text-gray-600 w-6 h-6" />
           <div className="ml-4">
             <h2 className="text-lg font-semibold">Delivery address</h2>
-            <p className="text-gray-600">
-              NA, 15/11, KG Halli, D' Souza Layout, Ashok Nagar, Bengaluru,
-              Karnataka 560001, India
-            </p>
-            <p className="text-green-500">42 MINS</p>
+            <p className="text-gray-600">Mars Planet, Sector 14, India</p>
+            <p className="text-green-500">42 LightYear</p>
           </div>
-          <button className="ml-auto" variant="secondary">
+          <button className="ml-auto" variant="secondary" onClick={() => {}}>
             CHANGE
           </button>
         </div>
-        <div className="flex items-center mb-4">
-          <WalletIcon className="text-gray-600 w-6 h-6" />
-          <div className="ml-4">
-            <h2 className="text-lg font-semibold">Choose payment method</h2>
+        {!paymentDone ? (
+          <div className="flex items-center mb-4">
+            <WalletIcon className="text-gray-600 w-6 h-6" />
+            <div className="ml-4">
+              <h2 className="text-lg font-semibold">Choose payment method</h2>
+            </div>
           </div>
-        </div>
-        <button className="bg-green-500 text-white w-full py-3">
-          PROCEED TO PAY
-        </button>
+        ) : (
+          <></>
+        )}
+        {!paymentDone ? (
+          <button
+            className="bg-green-500 text-white w-full py-3 "
+            onClick={() => {
+              SetPaymentDone(true);
+            }}
+          >
+            PROCEED TO PAY
+          </button>
+        ) : (
+          <></>
+        )}
       </div>
       <div className="w-1/2 bg-white p-8">
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h2 className="text-lg font-semibold">Louis Burger</h2>
-            <p className="text-gray-400">Koramangala</p>
+            <h2 className="text-lg font-semibold">
+              {restaurantDetails.details.name}
+            </h2>
+            <p className="text-gray-400">
+              {restaurantDetails.details.areaName === undefined
+                ? ""
+                : restaurantDetails.details.areaName}
+            </p>
           </div>
           <div className="flex items-center">
             <HelpCircleIcon className="text-gray-600 w-6 h-6" />
             <p className="ml-2 text-gray-600">Help</p>
-            {/* <Avatar
-              alt="User avatar"
-              className="ml-4"
-              src="/placeholder.svg?height=32&width=32"
-            /> */}
-            <p className="ml-2 text-gray-600">Tanmay</p>
           </div>
         </div>
         <div className="overflow-y-auto h-[calc(100vh-200px)]">
